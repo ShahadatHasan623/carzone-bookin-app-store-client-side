@@ -69,7 +69,7 @@ const AddCar = () => {
             <label className="block text-gray-700 font-semibold mb-1">
               Availability
             </label>
-            <select name="available" className="select select-bordered w-full">
+            <select name="availability" className="select select-bordered w-full">
               <option value="available">Available</option>
               <option value="not available">Not Available</option>
             </select>
