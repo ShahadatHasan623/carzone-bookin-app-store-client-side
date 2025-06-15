@@ -4,6 +4,8 @@ import Home from "../pages/Home/Home";
 import AvailableCar from "../pages/AvailableCar/AvailableCar";
 import Login from "../components/Login/Login";
 import Register from "../components/Register/Register";
+import AddCar from "../pages/AddCar/AddCar";
+import PrivateRoute from "../context/PrivateRoute";
 
 
 export const router =createBrowserRouter([
@@ -27,6 +29,10 @@ export const router =createBrowserRouter([
             {
                 path:'/register',
                 Component:Register
+            },
+            {
+                path:'/addcar',
+                element:<PrivateRoute><AddCar></AddCar></PrivateRoute>
             }
         ]
     }

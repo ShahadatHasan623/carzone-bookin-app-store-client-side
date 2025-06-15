@@ -6,14 +6,13 @@ import { AuthContext } from "../context/AuthContext";
 import { toast } from "react-toastify";
 
 const Navbar = () => {
-  const {user,signOutUser}=use(AuthContext)
+  const { user, signOutUser } = use(AuthContext);
   const [open, setOpen] = useState(false);
-  const handleSignOut =()=>{
-    signOutUser()
-    .then(()=>{
-      toast.success("Sign Out SuccessFully")
-    })
-  }
+  const handleSignOut = () => {
+    signOutUser().then(() => {
+      toast.success("Sign Out SuccessFully");
+    });
+  };
   const links = (
     <>
       <li>
@@ -40,6 +39,20 @@ const Navbar = () => {
           Available Cars
         </NavLink>
       </li>
+      {user && (
+        <li>
+          <NavLink
+            className={({ isActive }) =>
+              isActive
+                ? "text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br  focus:outline-none shadow-lg shadow-lime-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                : ""
+            }
+            to="addcar"
+          >
+            Add Car
+          </NavLink>
+        </li>
+      )}
     </>
   );
   return (
@@ -102,7 +115,8 @@ const Navbar = () => {
                   <p className="text-sm text-gray-500">{user.email}</p>
                 </div>
                 <div className="p-2">
-                  <button onClick={handleSignOut}
+                  <button
+                    onClick={handleSignOut}
                     className="w-full px-4 py-2 btn bg-gray-300 text-sm text-red-600 hover:bg-gray-100 rounded"
                   >
                     Sign Out
