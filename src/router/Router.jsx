@@ -6,6 +6,8 @@ import Login from "../components/Login/Login";
 import Register from "../components/Register/Register";
 import AddCar from "../pages/AddCar/AddCar";
 import PrivateRoute from "../context/PrivateRoute";
+import Book from "../pages/Book/Book";
+import Loading from "../components/Loading/Loading";
 
 
 export const router =createBrowserRouter([
@@ -33,6 +35,12 @@ export const router =createBrowserRouter([
             {
                 path:'/addcar',
                 element:<PrivateRoute><AddCar></AddCar></PrivateRoute>
+            },
+            {
+                path:'/book/:id',
+                Component:Book,
+                hydrateFallbackElement:<Loading></Loading>,
+                loader:({params})=>fetch(`http://localhost:3000/cars/available/${params.id}`)
             }
         ]
     }

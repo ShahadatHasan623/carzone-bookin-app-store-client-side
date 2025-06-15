@@ -1,6 +1,6 @@
 import React from "react";
 import { FiDollarSign } from "react-icons/fi";
-import { FaCheck, FaLocationDot } from "react-icons/fa6";
+import { FaCar, FaCheck, FaLocationDot } from "react-icons/fa6";
 import { Link } from "react-router";
 
 const AvailableCard = ({ carsData, isGridView }) => {
@@ -12,7 +12,8 @@ const AvailableCard = ({ carsData, isGridView }) => {
     location,
     price,
     availability,
-    _id
+    _id,
+    bookingCount,
   } = carsData;
 
   return (
@@ -49,7 +50,11 @@ const AvailableCard = ({ carsData, isGridView }) => {
             <span>{location}</span>
           </h1>
           <p className="text-sm break-words flex items-center gap-1">
-            <FaCheck className="text-green-700" /> <span className="whitespace-pre-line">{availability}</span>
+            <FaCheck className="text-green-700" />{" "}
+            <span className="whitespace-pre-line">{availability}</span>
+          </p>
+          <p className="flex items-center gap-1">
+            <FaCar className="text-blue-800" size={20}/> <span>BookingCount:{bookingCount}</span>
           </p>
         </div>
 
@@ -58,7 +63,9 @@ const AvailableCard = ({ carsData, isGridView }) => {
             <FiDollarSign className="text-[#e85e1a]" size={20} />
             <span>${price}/day</span>
           </p>
-          <Link to={`/book/${_id}`} className="btn btn-sm btn-primary">Book Now</Link>
+          <Link to={`/book/${_id}`} className="btn btn-sm btn-primary">
+            Book Now
+          </Link>
         </div>
       </div>
     </div>
