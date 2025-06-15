@@ -8,6 +8,7 @@ import AddCar from "../pages/AddCar/AddCar";
 import PrivateRoute from "../context/PrivateRoute";
 import Book from "../pages/Book/Book";
 import Loading from "../components/Loading/Loading";
+import MyBookingCar from "../pages/MyBookCar/MyBookingCar";
 
 
 export const router =createBrowserRouter([
@@ -41,6 +42,11 @@ export const router =createBrowserRouter([
                 Component:Book,
                 hydrateFallbackElement:<Loading></Loading>,
                 loader:({params})=>fetch(`http://localhost:3000/cars/available/${params.id}`)
+            },
+            {
+                path:'/myBookingCar/:id',
+                loader:({params})=>fetch(`http://localhost:3000/bookingcar/${params.id}`),
+                Component:MyBookingCar
             }
         ]
     }

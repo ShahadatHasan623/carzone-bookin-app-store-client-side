@@ -40,18 +40,31 @@ const Navbar = () => {
         </NavLink>
       </li>
       {user && (
-        <li>
-          <NavLink
-            className={({ isActive }) =>
-              isActive
-                ? "text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br  focus:outline-none shadow-lg shadow-lime-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-                : ""
-            }
-            to="addcar"
-          >
-            Add Car
-          </NavLink>
-        </li>
+        <>
+          <li>
+            <NavLink
+              className={({ isActive }) =>
+                isActive
+                  ? "text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br  focus:outline-none shadow-lg shadow-lime-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                  : ""
+              }
+              to="addcar"
+            >
+              Add Car
+            </NavLink>
+          </li>
+          <li>
+            <NavLink  to="/myBookingCar"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br  focus:outline-none shadow-lg shadow-lime-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                  : ""
+              }
+            >
+              My Booking
+            </NavLink>
+          </li>
+        </>
       )}
     </>
   );
