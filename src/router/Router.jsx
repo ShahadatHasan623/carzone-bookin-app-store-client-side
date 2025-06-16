@@ -45,8 +45,7 @@ export const router =createBrowserRouter([
                 loader:({params})=>fetch(`http://localhost:3000/cars/available/${params.id}`)
             },
             {
-                path:'/myBookingCar/:id',
-                loader:({params})=>fetch(`http://localhost:3000/bookingcar/${params.id}`),
+                path:'/myBookingCar',
                 Component:MyBookingCar
             },
             {

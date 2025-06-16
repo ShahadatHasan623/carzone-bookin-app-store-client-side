@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useLoaderData, useNavigate } from "react-router";
+import { useLoaderData } from "react-router";
 import Swal from "sweetalert2";
 
 const Book = () => {
@@ -12,8 +12,6 @@ const Book = () => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [totalCost, setTotalCost] = useState(0);
-
-  const navigate = useNavigate();
 
   const calculateDays = (start, end) => {
     const s = new Date(start);
@@ -44,6 +42,7 @@ const Book = () => {
       totalCost,
       imageUrl,
       bookedAt: new Date().toISOString(),
+      status: "confirmed",
     };
 
     axios
@@ -56,11 +55,10 @@ const Book = () => {
             Swal.fire({
               position: "center",
               icon: "success",
-              title: "Booking confirmed!",
-              showConfirmButton: false,
-              timer: 1500,
+              title: `Booking confirmed! Your ID: ${bookingId}`,
+              showConfirmButton: true,
             });
-            navigate(`/myBookingCar/${bookingId}`);
+            setShowModal(false);
           });
       })
       .catch((error) => {
@@ -94,20 +92,7 @@ const Book = () => {
             {availability === "available" ? "Available ✅" : "Not Available ❌"}
           </div>
           <p className="text-gray-600 text-sm leading-relaxed">{description}</p>
-          <div>
-            <h4 className="font-semibold text-gray-700 mt-4 mb-1">Features:</h4>
-            <ul className="list-disc list-inside text-sm text-gray-600 space-y-1">
-              {features && features.length > 0 ? (
-                features.map((feature, index) => (
-                  <li key={index} className="capitalize">
-                    {feature}
-                  </li>
-                ))
-              ) : (
-                <li>No special features listed.</li>
-              )}
-            </ul>
-          </div>
+
           <div className="card-actions justify-end pt-4">
             <button
               onClick={() => setShowModal(true)}
@@ -118,8 +103,9 @@ const Book = () => {
           </div>
         </div>
       </div>
+
       {showModal && (
-        <div className="fixed inset-0 flex items-center justify-center z-50  bg-opacity-40">
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-40 bg-black/40">
           <div className="bg-white p-8 rounded-xl w-full max-w-md shadow-lg relative">
             <h3 className="text-xl font-bold mb-4">Confirm Your Booking</h3>
             <p className="text-sm text-gray-600 mb-4">
@@ -172,6 +158,7 @@ const Book = () => {
             <button
               onClick={() => setShowModal(false)}
               className="absolute top-3 right-3 text-gray-500 hover:text-gray-800"
+              aria-label="Close modal"
             >
               ✕
             </button>

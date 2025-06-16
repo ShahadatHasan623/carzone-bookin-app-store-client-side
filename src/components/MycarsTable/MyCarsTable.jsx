@@ -1,8 +1,9 @@
-import React, { use } from "react";
+import React, { use, useState } from "react";
 import Table from "./Table";
 
 const MyCarsTable = ({ allCarsData }) => {
   const cars = use(allCarsData);
+  const [carsData,setCars]=useState(cars)
   return (
     <div className="overflow-x-auto">
       <table className="table">
@@ -19,7 +20,7 @@ const MyCarsTable = ({ allCarsData }) => {
         </thead>
         <tbody>
           {
-            cars.map(allTable=><Table key={allTable._id} allTable={allTable}></Table>)
+            carsData.map(allTable=><Table key={allTable._id} allTable={allTable}></Table>)
           }
           
         </tbody>

@@ -1,12 +1,17 @@
-import React from 'react';
-import { useLoaderData } from 'react-router';
+import React, { useEffect } from 'react';
+import { useState } from 'react';
+import MyBookingTable from './MyBookingTable';
 
 const MyBookingCar = () => {
-    const bookNow =useLoaderData()
-    console.log(bookNow)
+
+    const [booking,setBooking]=useState([])
+    useEffect(()=>{
+        fetch('http://localhost:3000/bookingcar').then(res=>res.json()).then(data=>setBooking(data))
+    },[])
+    
     return (
         <div>
-            
+            <MyBookingTable booking={booking}></MyBookingTable>
         </div>
     );
 };
