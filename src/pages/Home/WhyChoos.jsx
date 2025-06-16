@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "motion/react";
 import { FaMousePointer } from "react-icons/fa";
 import { FaCarSide, FaMoneyBillWave, FaPhoneVolume } from "react-icons/fa6";
 
@@ -36,9 +37,14 @@ const WhyChoos = () => {
       </h2>
       <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
         {features.map((feature, index) => (
-          <div
+          <motion.div
             key={index}
-            className="bg-gradient-to-b from-orange-500 to-orange-600 text-white rounded-xl p-6 shadow-lg hover:scale-105 transition-transform duration-300"
+            className="bg-gradient-to-b from-orange-500 to-orange-600 text-white rounded-xl p-6 shadow-lg"
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: index * 0.2 }}
+            viewport={{ once: true }}
+            whileHover={{ scale: 1.05 }}
           >
             <div className="flex justify-center mb-4">{feature.icon}</div>
             <h3 className="text-xl font-semibold text-center mb-2">
@@ -46,7 +52,7 @@ const WhyChoos = () => {
             </h3>
             <div className="w-12 h-1 bg-white mx-auto mb-3 rounded-full"></div>
             <p className="text-sm text-center">{feature.description}</p>
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>

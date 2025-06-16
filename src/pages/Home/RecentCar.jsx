@@ -1,0 +1,34 @@
+import React, { useEffect, useState } from "react";
+import RecentCard from "./RecentCard";
+
+const RecentCar = () => {
+  const [recentcar, setRecentCar] = useState([]);
+  useEffect(() => {
+    fetch("http://localhost:3000/cars/sortData")
+      .then((res) => res.json())
+      .then((data) => setRecentCar(data));
+  },[]);
+  return (
+  <div className="bg-gradient-to-b from-white to-slate-50 px-4 lg:px-0">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-10">
+          <h1 className="text-4xl font-bold text-blue-900 mb-2">
+             Recent Cars
+          </h1>
+          <p className="text-gray-600 text-sm max-w-xl mx-auto">
+            Explore our most recently added cars. Choose the one that fits your style and budget.
+          </p>
+        </div>
+
+        {/* Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {recentcar.map((recnt) => (
+            <RecentCard key={recnt._id} recnt={recnt} />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default RecentCar;
