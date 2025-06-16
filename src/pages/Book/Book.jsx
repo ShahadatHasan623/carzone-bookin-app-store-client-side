@@ -1,10 +1,12 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import { useLoaderData } from "react-router";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../context/AuthContext";
 
 const Book = () => {
   const bookData = useLoaderData();
+  const { user } = use(AuthContext);
   const { model, price, availability, features, imageUrl, description, _id } =
     bookData;
 
@@ -37,12 +39,14 @@ const Book = () => {
     const bookingInfo = {
       model,
       pricePerDay: price,
+      carId: _id, // Track which car was booked
       startDate,
       endDate,
       totalCost,
       imageUrl,
       bookedAt: new Date().toISOString(),
       status: "confirmed",
+      userEmail: user?.email || "unknown",
     };
 
     axios

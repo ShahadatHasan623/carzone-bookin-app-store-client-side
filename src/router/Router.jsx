@@ -50,7 +50,7 @@ export const router =createBrowserRouter([
             },
             {
                 path:"/mycar",
-                Component:MyCars
+                element:<PrivateRoute><MyCars></MyCars></PrivateRoute>
             },
         ]
     }

@@ -1,5 +1,5 @@
 import React, { use } from "react";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import { motion } from "motion/react";
 import logoImg from "../assets/logo.png";
 import { AuthContext } from "../context/AuthContext";
@@ -7,9 +7,11 @@ import { toast } from "react-toastify";
 
 const Navbar = () => {
   const { user, signOutUser } = use(AuthContext);
+  const navigate =useNavigate()
   const handleSignOut = () => {
     signOutUser().then(() => {
       toast.success("Sign Out SuccessFully");
+      navigate('/')
     });
   };
   const links = (

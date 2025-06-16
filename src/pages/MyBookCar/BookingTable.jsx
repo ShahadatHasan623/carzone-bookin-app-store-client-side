@@ -13,6 +13,7 @@ const BookingTable = ({ book }) => {
     startDate,
     status,
     _id,
+    userEmail, // এখানে ইউজার ইমেইল
   } = book;
 
   const [showModal, setShowModal] = useState(false);
@@ -30,10 +31,11 @@ const BookingTable = ({ book }) => {
         Swal.fire({
           position: "center",
           icon: "success",
-          title: "Update date time succesfully",
+          title: "Update date time successfully",
           showConfirmButton: false,
           timer: 1500,
         });
+        // Optional: এখানে তুমি আবার ডাটা রিফ্রেশ করতে পারো
       })
       .catch((err) => {
         console.error(err);
@@ -81,6 +83,13 @@ const BookingTable = ({ book }) => {
           </span>
         </td>
 
+        {/* Conditionally show userEmail column if exists */}
+        {userEmail && (
+          <td className="px-4 py-4 text-gray-700 text-sm font-medium">
+            {userEmail}
+          </td>
+        )}
+
         <td className="px-4 py-4">
           <div className="join join-vertical lg:join-horizontal gap-2">
             <button
@@ -96,7 +105,7 @@ const BookingTable = ({ book }) => {
         </td>
       </tr>
 
-      {/* Modal */}
+      {/* Modal for editing booking dates */}
       {showModal && (
         <div className="fixed inset-0 bg-black/40 flex justify-center items-center z-50">
           <div className="bg-white p-6 rounded-xl shadow-xl max-w-md w-full relative">
