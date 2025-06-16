@@ -9,6 +9,7 @@ import PrivateRoute from "../context/PrivateRoute";
 import Book from "../pages/Book/Book";
 import Loading from "../components/Loading/Loading";
 import MyBookingCar from "../pages/MyBookCar/MyBookingCar";
+import MyCars from "../pages/MyCar/MyCars";
 
 
 export const router =createBrowserRouter([
@@ -47,7 +48,17 @@ export const router =createBrowserRouter([
                 path:'/myBookingCar/:id',
                 loader:({params})=>fetch(`http://localhost:3000/bookingcar/${params.id}`),
                 Component:MyBookingCar
-            }
+            },
+            {
+                path:"/mycar",
+                Component:MyCars
+            },
+            // {
+            //     path:'/update/:id',
+            //     hydrateFallbackElement:<Loading></Loading>,
+            //     loader:({params})=>fetch(`http://localhost:3000/cars/allData/${params.id}`),
+            //     Component:UpdateCar
+            // }
         ]
     }
 ])

@@ -1,4 +1,4 @@
-import React, { use, useState } from "react";
+import React, { use } from "react";
 import { NavLink } from "react-router";
 import { motion } from "motion/react";
 import logoImg from "../assets/logo.png";
@@ -7,7 +7,6 @@ import { toast } from "react-toastify";
 
 const Navbar = () => {
   const { user, signOutUser } = use(AuthContext);
-  const [open, setOpen] = useState(false);
   const handleSignOut = () => {
     signOutUser().then(() => {
       toast.success("Sign Out SuccessFully");
@@ -54,7 +53,20 @@ const Navbar = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink  to="/myBookingCar"
+            <NavLink
+              to="/mycar"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br  focus:outline-none shadow-lg shadow-lime-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                  : ""
+              }
+            >
+              My Cars
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/myBookingCar"
               className={({ isActive }) =>
                 isActive
                   ? "text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br  focus:outline-none shadow-lg shadow-lime-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
@@ -63,6 +75,11 @@ const Navbar = () => {
             >
               My Booking
             </NavLink>
+          </li>
+          <li>
+            <button onClick={handleSignOut} className="hover:btn">
+              LogOut
+            </button>
           </li>
         </>
       )}
@@ -110,47 +127,24 @@ const Navbar = () => {
       </div>
       <div className="navbar-end">
         {user ? (
-          <div className="relative inline-block text-left">
-            <div onClick={() => setOpen(!open)} className="cursor-pointer">
-              <img
-                className="w-12 h-12 rounded-full hover:border-3 hover:border-[#FBBF24]"
-                src={user?.photoURL}
-                alt="Profile"
-              />
-            </div>
-
-            {open && (
-              <div className="absolute right-0 mt-2 w-88  rounded-lg shadow-lg bg-white z-50">
-                <div className="px-4 py-3 border-b flex flex-col items-center justify-center z-10">
-                  <p className="font-medium text-gray-800">
-                    {user.displayName}
-                  </p>
-                  <p className="text-sm text-gray-500">{user.email}</p>
-                </div>
-                <div className="p-2">
-                  <button
-                    onClick={handleSignOut}
-                    className="w-full px-4 py-2 btn bg-gray-300 text-sm text-red-600 hover:bg-gray-100 rounded"
-                  >
-                    Sign Out
-                  </button>
-                </div>
-              </div>
-            )}
+          <div>
+            <img
+              className="h-20 w-20 rounded-full"
+              src={user.photoURL}
+              alt="User Profile"
+            />
           </div>
         ) : (
-          <div className="flex gap-2">
-            <motion.button
-              whileHover={{
-                scale: 1.1,
-                textShadow: "0px 0px 8px rgb(255,255,255)",
-                boxShadow: "0px 0px 8px rgb(251,191,36)",
-              }}
-              className="px-8 py-2 rounded-4xl border-2 font-semibold border-[#FBBF24]"
-            >
-              <NavLink to="/login">Login</NavLink>
-            </motion.button>
-          </div>
+          <motion.button
+            whileHover={{
+              scale: 1.1,
+              textShadow: "0px 0px 8px rgb(255,255,255)",
+              boxShadow: "0px 0px 8px rgb(251,191,36)",
+            }}
+            className="px-8 py-2 rounded-4xl border-2 font-semibold border-[#FBBF24]"
+          >
+            <NavLink to="/login">Login</NavLink>
+          </motion.button>
         )}
       </div>
     </div>

@@ -49,18 +49,19 @@ const Book = () => {
     axios
       .post("http://localhost:3000/bookingcar", bookingInfo)
       .then((res) => {
-        console.log("Booking Saved:", res.data);
         const bookingId = res.data.insertedId || res.data._id;
-        if (res.data.insertedId) {
-          Swal.fire({
-            position: "center",
-            icon: "success",
-            title: "Your work has been saved",
-            showConfirmButton: false,
-            timer: 1500,
+        return axios
+          .patch(`http://localhost:3000/cars/increase-booking/${_id}`)
+          .then(() => {
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Booking confirmed!",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            navigate(`/myBookingCar/${bookingId}`);
           });
-        }
-        navigate(`/myBookingCar/${bookingId}`);
       })
       .catch((error) => {
         console.error(error);
@@ -93,7 +94,20 @@ const Book = () => {
             {availability === "available" ? "Available ✅" : "Not Available ❌"}
           </div>
           <p className="text-gray-600 text-sm leading-relaxed">{description}</p>
-          <p>Features :{features}</p>
+          <div>
+            <h4 className="font-semibold text-gray-700 mt-4 mb-1">Features:</h4>
+            <ul className="list-disc list-inside text-sm text-gray-600 space-y-1">
+              {features && features.length > 0 ? (
+                features.map((feature, index) => (
+                  <li key={index} className="capitalize">
+                    {feature}
+                  </li>
+                ))
+              ) : (
+                <li>No special features listed.</li>
+              )}
+            </ul>
+          </div>
           <div className="card-actions justify-end pt-4">
             <button
               onClick={() => setShowModal(true)}

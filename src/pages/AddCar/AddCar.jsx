@@ -12,6 +12,7 @@ const AddCar = () => {
     const formData = new FormData(form);
     const car = Object.fromEntries(formData.entries());
     car.bookingCount = Number(car.bookingCount) || 0;
+    car.features=car.features.split(',').map(req=>req.trim());
     axios
       .post("http://localhost:3000/cars", car)
       .then((res) => {
@@ -136,8 +137,6 @@ const AddCar = () => {
               required
             />
           </div>
-
-          {/* Location */}
           <div>
             <label className="block text-gray-700 font-semibold mb-1">
               Location
