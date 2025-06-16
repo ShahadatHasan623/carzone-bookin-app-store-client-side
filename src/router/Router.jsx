@@ -46,18 +46,12 @@ export const router =createBrowserRouter([
             },
             {
                 path:'/myBookingCar',
-                Component:MyBookingCar
+                element:<PrivateRoute><MyBookingCar></MyBookingCar></PrivateRoute>
             },
             {
                 path:"/mycar",
                 Component:MyCars
             },
-            // {
-            //     path:'/update/:id',
-            //     hydrateFallbackElement:<Loading></Loading>,
-            //     loader:({params})=>fetch(`http://localhost:3000/cars/allData/${params.id}`),
-            //     Component:UpdateCar
-            // }
         ]
     }
 ])

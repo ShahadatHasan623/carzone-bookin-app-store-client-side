@@ -5,7 +5,6 @@ const MyBookingTable = ({ booking }) => {
   return (
     <div className="overflow-x-auto bg-white rounded-xl shadow-lg mt-10">
       <table className="table-auto w-full text-sm text-left text-gray-700">
-        {/* Table Header */}
         <thead className="bg-gray-100 text-gray-700 uppercase text-xs border-b">
           <tr>
             <th className="px-6 py-4">Car Image</th>
@@ -19,7 +18,6 @@ const MyBookingTable = ({ booking }) => {
           </tr>
         </thead>
 
-        {/* Table Body */}
         <tbody className="divide-y divide-gray-200">
           {booking.map((book) => (
             <BookingTable key={book._id} book={book} />

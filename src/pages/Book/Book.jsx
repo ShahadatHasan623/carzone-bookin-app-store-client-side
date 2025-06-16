@@ -16,9 +16,9 @@ const Book = () => {
   const calculateDays = (start, end) => {
     const s = new Date(start);
     const e = new Date(end);
-    const timeDiff = e - s;
+    const timeDiff = e.getTime() - s.getTime();
     const dayDiff = timeDiff / (1000 * 60 * 60 * 24);
-    return dayDiff > 0 ? dayDiff : 0;
+    return dayDiff > 0 ? Math.ceil(dayDiff) : 0;
   };
 
   const handleDateChange = (start, end) => {
@@ -92,7 +92,25 @@ const Book = () => {
             {availability === "available" ? "Available ✅" : "Not Available ❌"}
           </div>
           <p className="text-gray-600 text-sm leading-relaxed">{description}</p>
-
+          <div>
+            <h4 className="text-sm font-semibold text-gray-700 mb-1">
+              Features:
+            </h4>
+            <ul className="flex flex-wrap gap-2 text-sm text-gray-600">
+              {features?.length > 0 ? (
+                features.map((feature, idx) => (
+                  <li
+                    key={idx}
+                    className="bg-gray-200 px-3 py-1 rounded-full text-xs text-gray-700"
+                  >
+                    {feature}
+                  </li>
+                ))
+              ) : (
+                <li className="text-gray-500 italic">No features listed</li>
+              )}
+            </ul>
+          </div>
           <div className="card-actions justify-end pt-4">
             <button
               onClick={() => setShowModal(true)}
@@ -115,18 +133,18 @@ const Book = () => {
 
             <div className="space-y-3">
               <div>
-                <label className="text-sm font-medium">Start Date</label>
+                <label className="text-sm font-medium">Start Date & Time</label>
                 <input
-                  type="date"
+                  type="datetime-local"
                   className="w-full border rounded px-3 py-2 mt-1"
                   value={startDate}
                   onChange={(e) => handleDateChange(e.target.value, endDate)}
                 />
               </div>
               <div>
-                <label className="text-sm font-medium">End Date</label>
+                <label className="text-sm font-medium">End Date & Time</label>
                 <input
-                  type="date"
+                  type="datetime-local"
                   className="w-full border rounded px-3 py-2 mt-1"
                   value={endDate}
                   onChange={(e) => handleDateChange(startDate, e.target.value)}

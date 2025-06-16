@@ -20,7 +20,7 @@ const MyCarsTable = ({ allCarsData }) => {
         </thead>
         <tbody>
           {
-            carsData.map(allTable=><Table key={allTable._id} allTable={allTable}></Table>)
+            carsData.map(allTable=><Table key={allTable._id} setCars={setCars} allTable={allTable}></Table>)
           }
           
         </tbody>
