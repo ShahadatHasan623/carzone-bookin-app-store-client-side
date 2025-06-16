@@ -16,7 +16,7 @@ const Navbar = () => {
   };
   const links = (
     <>
-      <li>
+      <li className="text-amber-600">
         <NavLink
           className={({ isActive }) =>
             isActive
@@ -28,7 +28,7 @@ const Navbar = () => {
           Home
         </NavLink>
       </li>
-      <li>
+      <li className="text-amber-600">
         <NavLink
           className={({ isActive }) =>
             isActive
@@ -42,7 +42,7 @@ const Navbar = () => {
       </li>
       {user && (
         <>
-          <li>
+          <li className="text-amber-600">
             <NavLink
               className={({ isActive }) =>
                 isActive
@@ -54,7 +54,7 @@ const Navbar = () => {
               Add Car
             </NavLink>
           </li>
-          <li>
+          <li className="text-amber-600">
             <NavLink
               to="/mycar"
               className={({ isActive }) =>
@@ -66,7 +66,7 @@ const Navbar = () => {
               My Cars
             </NavLink>
           </li>
-          <li>
+          <li className="text-amber-600">
             <NavLink
               to="/myBookingCar"
               className={({ isActive }) =>

@@ -13,7 +13,6 @@ const BookingTable = ({ book }) => {
     startDate,
     status,
     _id,
-    userEmail, // এখানে ইউজার ইমেইল
   } = book;
 
   const [showModal, setShowModal] = useState(false);
@@ -35,7 +34,6 @@ const BookingTable = ({ book }) => {
           showConfirmButton: false,
           timer: 1500,
         });
-        // Optional: এখানে তুমি আবার ডাটা রিফ্রেশ করতে পারো
       })
       .catch((err) => {
         console.error(err);
@@ -82,13 +80,6 @@ const BookingTable = ({ book }) => {
             {status}
           </span>
         </td>
-
-        {/* Conditionally show userEmail column if exists */}
-        {userEmail && (
-          <td className="px-4 py-4 text-gray-700 text-sm font-medium">
-            {userEmail}
-          </td>
-        )}
 
         <td className="px-4 py-4">
           <div className="join join-vertical lg:join-horizontal gap-2">

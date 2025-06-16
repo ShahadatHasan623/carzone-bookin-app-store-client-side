@@ -101,18 +101,20 @@ const Book = () => {
               Features:
             </h4>
             <ul className="flex flex-wrap gap-2 text-sm text-gray-600">
-              {features?.length > 0 ? (
-                features.map((feature, idx) => (
-                  <li
-                    key={idx}
-                    className="bg-gray-200 px-3 py-1 rounded-full text-xs text-gray-700"
-                  >
-                    {feature}
-                  </li>
-                ))
-              ) : (
-                <li className="text-gray-500 italic">No features listed</li>
-              )}
+              <ul className="flex flex-wrap gap-2">
+                {Array.isArray(features) && features.length > 0 ? (
+                  features.map((feature, idx) => (
+                    <li
+                      key={idx}
+                      className="bg-gray-200 px-3 py-1 rounded-full text-xs text-gray-700"
+                    >
+                      {feature}
+                    </li>
+                  ))
+                ) : (
+                  <li className="text-gray-500 italic">No features listed</li>
+                )}
+              </ul>
             </ul>
           </div>
           <div className="card-actions justify-end pt-4">

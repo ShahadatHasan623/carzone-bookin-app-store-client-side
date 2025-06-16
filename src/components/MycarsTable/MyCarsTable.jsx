@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import Table from "./Table";
 
-const MyCarsTable = ({ allCarsData, sortOrder, setCars }) => {
+const MyCarsTable = ({ allCarsData,setAllCarsData, sortOrder, }) => {
   const sortedCars = useMemo(() => {
     const carsCopy = [...allCarsData];
     if (sortOrder === "lowest") {
@@ -32,7 +32,7 @@ const MyCarsTable = ({ allCarsData, sortOrder, setCars }) => {
               key={car._id}
               allTable={car}
               carsData={allCarsData}
-              setCars={setCars}
+              setCars={setAllCarsData}
             />
           ))}
         </tbody>

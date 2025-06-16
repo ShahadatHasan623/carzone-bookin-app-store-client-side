@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 import MyCarsTable from "../../components/MycarsTable/MyCarsTable";
-import { useNavigate } from "react-router";
 import AddedCars from "../AddedCars/AddedCars";
+import useAuth from "../../hooks/useAuth";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const MyCars = () => {
   const [allCarsData, setAllCarsData] = useState([]);
   const [sortOrder, setSortOrder] = useState("lowest");
-  const navigate =useNavigate()
+  const{user}=useAuth()
+  const axiosSecure =useAxiosSecure()
 
   useEffect(() => {
-    fetch("http://localhost:3000/cars")
-      .then((res) => res.json())
-      .then((data) => {
+    axiosSecure("/cars")
+      .then(({data}) => {
         setAllCarsData(data);
       });
   }, []);
@@ -49,7 +50,7 @@ const MyCars = () => {
               <option value="highest">Highest First</option>
             </select>
           </div>
-          <MyCarsTable allCarsData={allCarsData} sortOrder={sortOrder} />
+          <MyCarsTable setAllCarsData={setAllCarsData} allCarsData={allCarsData} sortOrder={sortOrder} />
         </>
       )}
     </div>
