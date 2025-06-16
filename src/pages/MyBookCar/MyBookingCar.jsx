@@ -2,14 +2,15 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import MyBookingTable from "./MyBookingTable";
 import useAuth from "../../hooks/useAuth";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const MyBookingCar = () => {
   const [booking, setBooking] = useState([]);
   const {user}=useAuth()
+  const axiosSecure =useAxiosSecure()
   useEffect(() => {
-    fetch(`http://localhost:3000/bookingcar?email=${user.email}`)
-      .then((res) => res.json())
-      .then((data) => setBooking(data));
+    axiosSecure(`/bookingcar?email=${user.email}`)
+      .then(({data}) => setBooking(data));
   }, []);
 
   return (

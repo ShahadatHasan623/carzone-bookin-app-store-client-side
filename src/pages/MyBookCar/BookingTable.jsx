@@ -25,7 +25,7 @@ const BookingTable = ({ book }) => {
         startDate: editStartDate,
         endDate: editEndDate,
       })
-      .then((res) => {
+      .then(() => {
         setShowModal(false);
         Swal.fire({
           position: "center",
