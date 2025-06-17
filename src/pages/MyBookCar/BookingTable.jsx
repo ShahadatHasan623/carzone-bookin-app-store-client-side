@@ -3,7 +3,7 @@ import { FaEdit } from "react-icons/fa";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-const BookingTable = ({ book,reload,setReload }) => {
+const BookingTable = ({ book, reload, setReload }) => {
   const {
     imageUrl,
     model,
@@ -42,24 +42,33 @@ const BookingTable = ({ book,reload,setReload }) => {
   };
 
   const handleCancel = (id) => {
-    axios
-      .patch(`https://cars-server-side.vercel.app/bookingcar/cancel/${id}`, {
-        status: "cancelled",
-      })
-      .then(() => {
-        setReload(!reload)
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Booking cancelled successfully",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-      })
-      .catch((err) => {
-        console.error(err);
-        alert("Cancellation Failed");
-      });
+    Swal.fire({
+      title: "Do you want to cancel the booking?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Yes, Cancel",
+      denyButtonText: `No`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .patch(
+            `https://cars-server-side.vercel.app/bookingcar/cancel/${id}`,
+            {
+              status: "cancelled",
+            }
+          )
+          .then(() => {
+            setReload(!reload); 
+            Swal.fire("Booking Cancelled!", "", "success");
+          })
+          .catch((err) => {
+            console.error(err);
+            Swal.fire("Cancellation Failed", "Please try again later", "error");
+          });
+      } else if (result.isDenied) {
+        Swal.fire("No changes were made", "", "info");
+      }
+    });
   };
 
   return (
