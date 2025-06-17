@@ -30,7 +30,7 @@ const images = [
 
 const CarImageGallery = () => {
   return (
-    <div className="max-w-7xl mx-auto px-4 py-14">
+    <div className="max-w-7xl mx-auto lg:px-0 px-4 py-14">
       <h2 className="text-4xl font-extrabold text-center text-blue-800 mb-12">
         Explore the Car in Detail
       </h2>
