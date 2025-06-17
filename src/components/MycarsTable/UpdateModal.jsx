@@ -6,7 +6,7 @@ const UpdateModal = ({ carId, closeModal }) => {
   const [carData, setCarData] = useState(null);
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/cars/${carId}`).then((res) => {
+    axios.get(`https://cars-server-side.vercel.app/cars/${carId}`).then((res) => {
       setCarData(res.data);
     });
   }, [carId]);
@@ -25,7 +25,7 @@ const UpdateModal = ({ carId, closeModal }) => {
       location: form.location.value,
     };
 
-    axios.put(`http://localhost:3000/cars/${carId}`, updatedCar).then(() => {
+    axios.put(`https://cars-server-side.vercel.app/cars/${carId}`, updatedCar).then(() => {
       Swal.fire({
         position: "center",
         icon: "success",

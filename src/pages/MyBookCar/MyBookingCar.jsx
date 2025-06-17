@@ -6,16 +6,23 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const MyBookingCar = () => {
   const [booking, setBooking] = useState([]);
-  const {user}=useAuth()
-  const axiosSecure =useAxiosSecure()
+  const [reload, setReload] = useState(false);
+  const { user } = useAuth();
+
+  const axiosSecure = useAxiosSecure();
   useEffect(() => {
-    axiosSecure(`/bookingcar?email=${user.email}`)
-      .then(({data}) => setBooking(data));
-  }, []);
+    axiosSecure(`/bookingcar?email=${user.email}`).then(({ data }) =>
+      setBooking(data)
+    );
+  }, [reload, user, axiosSecure]);
 
   return (
     <div>
-      <MyBookingTable booking={booking}></MyBookingTable>
+      <MyBookingTable
+        reload={reload}
+        setReload={setReload}
+        booking={booking}
+      ></MyBookingTable>
     </div>
   );
 };

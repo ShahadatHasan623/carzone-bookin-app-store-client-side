@@ -11,7 +11,7 @@ const MyCars = () => {
   const axiosSecure =useAxiosSecure()
 
   useEffect(() => {
-    axiosSecure("/cars")
+    axiosSecure(`/cars?email=${user.email}`)
       .then(({data}) => {
         setAllCarsData(data);
       });

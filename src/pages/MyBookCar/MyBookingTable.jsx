@@ -1,7 +1,7 @@
 import React from "react";
 import BookingTable from "./BookingTable";
 
-const MyBookingTable = ({ booking }) => {
+const MyBookingTable = ({ booking,reload,setReload }) => {
   return (
     <div className="overflow-x-auto bg-white rounded-xl shadow-lg mt-10">
       <table className="table-auto w-full text-sm text-left text-gray-700">
@@ -20,7 +20,7 @@ const MyBookingTable = ({ booking }) => {
 
         <tbody className="divide-y divide-gray-200">
           {booking.map((book) => (
-            <BookingTable key={book._id} book={book} />
+            <BookingTable setReload={setReload} reload={reload} key={book._id} book={book} />
           ))}
         </tbody>
       </table>

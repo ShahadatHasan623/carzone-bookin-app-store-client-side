@@ -14,7 +14,7 @@ const AddCar = () => {
     car.bookingCount = Number(car.bookingCount) || 0;
     car.features=car.features.split(',').map(req=>req.trim());
     axios
-      .post("http://localhost:3000/cars", car)
+      .post("https://cars-server-side.vercel.app/cars", car)
       .then((res) => {
         if (res.data.insertedId) {
           Swal.fire({

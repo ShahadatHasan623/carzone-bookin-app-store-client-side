@@ -50,11 +50,11 @@ const Book = () => {
     };
 
     axios
-      .post("http://localhost:3000/bookingcar", bookingInfo)
+      .post("https://cars-server-side.vercel.app/bookingcar", bookingInfo)
       .then((res) => {
         const bookingId = res.data.insertedId || res.data._id;
         return axios
-          .patch(`http://localhost:3000/cars/increase-booking/${_id}`)
+          .patch(`https://cars-server-side.vercel.app/cars/increase-booking/${_id}`)
           .then(() => {
             Swal.fire({
               position: "center",

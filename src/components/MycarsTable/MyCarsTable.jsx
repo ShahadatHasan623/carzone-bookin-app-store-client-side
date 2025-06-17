@@ -21,6 +21,7 @@ const MyCarsTable = ({ allCarsData,setAllCarsData, sortOrder, }) => {
             <th className="px-6 py-3 text-left">Image</th>
             <th className="px-6 py-3 text-left">Model</th>
             <th className="px-6 py-3 text-left">Price</th>
+            <th className="px-6 py-3 text-left">bookingCount</th>
             <th className="px-6 py-3 text-left">Availability</th>
             <th className="px-6 py-3 text-left">Date Added</th>
             <th className="px-6 py-3 text-left">Action</th>

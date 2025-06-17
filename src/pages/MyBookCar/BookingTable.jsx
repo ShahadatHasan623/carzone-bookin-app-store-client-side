@@ -3,7 +3,7 @@ import { FaEdit } from "react-icons/fa";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-const BookingTable = ({ book }) => {
+const BookingTable = ({ book,reload,setReload }) => {
   const {
     imageUrl,
     model,
@@ -21,7 +21,7 @@ const BookingTable = ({ book }) => {
 
   const handleConfirmUpdate = () => {
     axios
-      .patch(`http://localhost:3000/bookingcar/update/${_id}`, {
+      .patch(`https://cars-server-side.vercel.app/bookingcar/update/${_id}`, {
         startDate: editStartDate,
         endDate: editEndDate,
       })
@@ -38,6 +38,27 @@ const BookingTable = ({ book }) => {
       .catch((err) => {
         console.error(err);
         alert("Update Failed");
+      });
+  };
+
+  const handleCancel = (id) => {
+    axios
+      .patch(`https://cars-server-side.vercel.app/bookingcar/cancel/${id}`, {
+        status: "cancelled",
+      })
+      .then(() => {
+        setReload(!reload)
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Booking cancelled successfully",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+        alert("Cancellation Failed");
       });
   };
 
@@ -74,6 +95,8 @@ const BookingTable = ({ book }) => {
             className={`px-3 py-1 rounded-full text-xs font-semibold uppercase ${
               status === "confirmed"
                 ? "bg-green-100 text-green-700"
+                : status === "cancelled"
+                ? "bg-red-100 text-red-700"
                 : "bg-yellow-100 text-yellow-700"
             }`}
           >
@@ -89,7 +112,10 @@ const BookingTable = ({ book }) => {
             >
               <FaEdit size={20} />
             </button>
-            <button className="btn bg-red-500 hover:bg-red-600 text-white">
+            <button
+              onClick={() => handleCancel(_id)}
+              className="btn bg-red-500 hover:bg-red-600 text-white"
+            >
               Cancel
             </button>
           </div>

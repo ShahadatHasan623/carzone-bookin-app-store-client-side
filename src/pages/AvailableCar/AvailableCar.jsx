@@ -8,7 +8,7 @@ const AvailableCar = () => {
   const [isGridView, setIsGridView] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/cars/available?searchParams=${search}`)
+    fetch(`https://cars-server-side.vercel.app/cars/available?searchParams=${search}`)
       .then((res) => res.json())
       .then((data) => {
         let sortedData = [...data];

@@ -4,7 +4,7 @@ import RecentCard from "./RecentCard";
 const RecentCar = () => {
   const [recentcar, setRecentCar] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:3000/cars/sortData")
+    fetch("https://cars-server-side.vercel.app/cars/sortData")
       .then((res) => res.json())
       .then((data) => setRecentCar(data));
   },[]);

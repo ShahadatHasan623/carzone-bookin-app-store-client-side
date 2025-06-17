@@ -42,7 +42,7 @@ export const router =createBrowserRouter([
                 path:'/book/:id',
                 Component:Book,
                 hydrateFallbackElement:<Loading></Loading>,
-                loader:({params})=>fetch(`http://localhost:3000/cars/available/${params.id}`)
+                loader:({params})=>fetch(`https://cars-server-side.vercel.app/cars/available/${params.id}`)
             },
             {
                 path:'/myBookingCar',
