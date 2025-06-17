@@ -4,7 +4,7 @@ import AvailableCard from "../../components/availableCard/AvailableCard";
 const AvailableCar = () => {
   const [carsData, setCarsData] = useState([]);
   const [search, setSearch] = useState("");
-  const [sortOrder, setSortOrder] = useState(""); // New sort state
+  const [sortOrder, setSortOrder] = useState("");
   const [isGridView, setIsGridView] = useState(true);
 
   useEffect(() => {
@@ -27,43 +27,41 @@ const AvailableCar = () => {
   };
 
   return (
-    <div>
-      <div className="flex lg:flex-row flex-col justify-between gap-5 mb-8 items-center">
-        <div>
-          <input
-            type="text"
-            placeholder="Type here"
-            className="input w-96"
-            onChange={(e) => setSearch(e.target.value)}
-          />
-        </div>
-        <div className="flex gap-2 items-center">
-          <div>
-            <select
-              className="select"
-              defaultValue=""
-              onChange={(e) => setSortOrder(e.target.value)}
-            >
-              <option disabled value="">
-                Sort By
-              </option>
-              <option value="lowToHigh">Price: Lowest First</option>
-              <option value="highToLow">Price: Highest First</option>
-            </select>
-          </div>
+    <div className="px-4 md:px-10 py-6">
+      {/* Search and Controls */}
+      <div className="flex flex-col lg:flex-row justify-between gap-4 items-center mb-8">
+        <input
+          type="text"
+          placeholder="Search car model"
+          className="input input-bordered w-full sm:max-w-md"
+          onChange={(e) => setSearch(e.target.value)}
+        />
+
+        <div className="flex gap-3 flex-col sm:flex-row items-center w-full sm:w-auto">
+          <select
+            className="select select-bordered w-full sm:w-48"
+            defaultValue=""
+            onChange={(e) => setSortOrder(e.target.value)}
+          >
+            <option disabled value="">Sort By</option>
+            <option value="lowToHigh">Price: Lowest First</option>
+            <option value="highToLow">Price: Highest First</option>
+          </select>
+
           <button
             onClick={handleToggleView}
-            className="btn bg-[#e85e1a] text-white"
+            className="btn bg-[#e85e1a] text-white w-full sm:w-auto"
           >
             Toggle to {isGridView ? "list" : "grid"} view
           </button>
         </div>
       </div>
 
+      {/* Cars Grid/List */}
       <div
-        className={`grid gap-5 ${
+        className={`gap-5 ${
           isGridView
-            ? "grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
+            ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
             : "flex flex-col"
         }`}
       >
