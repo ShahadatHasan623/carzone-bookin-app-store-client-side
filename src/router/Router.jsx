@@ -10,12 +10,14 @@ import Book from "../pages/Book/Book";
 import Loading from "../components/Loading/Loading";
 import MyBookingCar from "../pages/MyBookCar/MyBookingCar";
 import MyCars from "../pages/MyCar/MyCars";
+import ErrorPage from "../pages/Error/ErrorPage";
 
 
 export const router =createBrowserRouter([
     {
         path:'/',
         Component:Root,
+        errorElement:<ErrorPage></ErrorPage>,
         children:[
             {
                 index:true,

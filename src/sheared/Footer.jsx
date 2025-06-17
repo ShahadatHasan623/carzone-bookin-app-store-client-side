@@ -6,6 +6,7 @@ import {
   FaLinkedinIn,
 } from "react-icons/fa";
 import logo from "../assets/logo.png"
+import { NavLink } from "react-router";
 
 const Footer = () => {
   return (
@@ -29,11 +30,10 @@ const Footer = () => {
           </p>
         </div>
 
-        {/* Services */}
         <div>
           <h4 className="font-semibold mb-3">Services</h4>
           <ul className="space-y-2 text-sm">
-            <li><a className="hover:underline" href="#">Car Booking</a></li>
+            <li><NavLink to="/myBookingCar" className="hover:underline">Car Booking</NavLink></li>
             <li><a className="hover:underline" href="#">Corporate Rentals</a></li>
             <li><a className="hover:underline" href="#">Long Term</a></li>
             <li><a className="hover:underline" href="#">24/7 Support</a></li>
