@@ -9,10 +9,10 @@ const RecentCar = () => {
       .then((data) => setRecentCar(data));
   },[]);
   return (
-  <div className="bg-gradient-to-b from-white to-slate-50 px-4 lg:px-0">
-      <div className="max-w-6xl mx-auto">
+  <div className="bg-gradient-to-b from-white to-slate-50 px-4 lg:px-0 max-w-7xl mx-auto mt-16">
+      <div>
         <div className="text-center mb-10">
-          <h1 className="text-4xl font-bold text-blue-900 mb-2">
+          <h1 className="text-4xl font-bold text-primary mb-2">
              Recent Cars
           </h1>
           <p className="text-gray-600 text-sm max-w-xl mx-auto">

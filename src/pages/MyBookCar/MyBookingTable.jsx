@@ -3,7 +3,7 @@ import BookingTable from "./BookingTable";
 
 const MyBookingTable = ({ booking,reload,setReload }) => {
   return (
-    <div className="overflow-x-auto bg-white rounded-xl shadow-lg mt-10">
+    <div className="overflow-x-auto bg-white rounded-xl shadow-lg">
       <table className="table-auto w-full text-sm text-left text-gray-700">
         <thead className="bg-gray-100 text-gray-700 uppercase text-xs border-b">
           <tr>

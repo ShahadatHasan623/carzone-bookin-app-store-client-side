@@ -78,7 +78,7 @@ const Navbar = () => {
               My Booking
             </NavLink>
           </li>
-          <li>
+          <li className="text-amber-600">
             <button onClick={handleSignOut} className="hover:btn">
               LogOut
             </button>
@@ -88,7 +88,7 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className="navbar bg-[#1F2937] shadow-sm text-[#FFFFFF]">
+    <div className="navbar bg-[#1F2937] shadow-sm text-[#FFFFFF] sticky top-0 z-50 px-6">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -116,7 +116,7 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="flex items-center gap-1">
-          <img className="h-20" src={logoImg} alt="" />
+          <img className="h-16" src={logoImg} alt="" />
           <div>
             <h1 className="uppercase flex items-center gap-1 text-2xl font-bold">
               car<span className="text-[#FBBF24]">zone</span>
@@ -131,7 +131,7 @@ const Navbar = () => {
         {user ? (
           <div>
             <img
-              className="h-16 w-16 rounded-full"
+              className="h-12 w-12 rounded-full"
               src={user.photoURL}
               alt="User Profile"
             />

@@ -33,7 +33,7 @@ const AddCar = () => {
   };
 
   return (
-    <div className="w-full px-4 py-8 sm:px-6 lg:px-8">
+    <div className="w-full lg:px-0 px-4 py-16 md:px-4">
       <div className="max-w-3xl mx-auto bg-[#F9FAFB] p-8 sm:p-10 rounded-2xl shadow-xl">
         <h2 className="text-3xl sm:text-4xl font-bold text-center text-gray-800 mb-8">
           Add New Car

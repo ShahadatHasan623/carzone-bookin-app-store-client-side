@@ -17,7 +17,7 @@ const MyBookingCar = () => {
   }, [reload, user, axiosSecure]);
 
   return (
-    <div>
+    <div className="max-w-7xl mx-auto py-16">
       <MyBookingTable
         reload={reload}
         setReload={setReload}

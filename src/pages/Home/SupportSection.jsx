@@ -18,13 +18,13 @@ const cardVariants = {
 
 const SupportSection = () => {
   return (
-    <section className="max-w-6xl mx-auto p-6 bg-white rounded-lg shadow-md mt-12">
+    <section className="max-w-7xl mx-auto bg-white rounded-lg shadow-md my-16 p-6 mt-16">
       <motion.h2
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="text-3xl font-bold mb-4 text-center text-gray-800"
+        className="text-3xl font-bold mb-4 text-center text-primary"
       >
         Need Help? Contact Support
       </motion.h2>

@@ -5,6 +5,7 @@ import RecentCar from './RecentCar';
 import CarImageGallery from './CarImageGallery';
 import SupportSection from './SupportSection';
 import Customer from './Customer';
+import OfferSection from '../offerSection/offerSection';
 
 const Home = () => {
     return (
@@ -13,6 +14,7 @@ const Home = () => {
             <WhyChoos></WhyChoos>
             <RecentCar></RecentCar>
             <CarImageGallery></CarImageGallery>
+            <OfferSection></OfferSection>
             <Customer></Customer>
             <SupportSection></SupportSection>
         </div>

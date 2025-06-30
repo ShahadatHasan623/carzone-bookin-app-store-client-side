@@ -36,7 +36,7 @@ const AvailableCard = ({ carsData, isGridView }) => {
         />
       </div>
 
-      <div className="p-4 flex flex-col justify-between gap-2 overflow-hidden">
+      <div className="p-6 flex flex-col justify-between gap-2 overflow-hidden">
         <div className="space-y-1">
           <h2 className="text-xl font-bold text-gray-800">{model}</h2>
           <p className="text-sm text-gray-600 mt-1 line-clamp-3 break-words">
@@ -54,7 +54,7 @@ const AvailableCard = ({ carsData, isGridView }) => {
             <span className="whitespace-pre-line">{availability}</span>
           </p>
           <p className="flex items-center gap-1">
-            <FaCar className="text-blue-800" size={20}/> <span>BookingCount:{bookingCount}</span>
+            <FaCar className="text-primary" size={20}/> <span>bookingcount:{bookingCount}</span>
           </p>
         </div>
 

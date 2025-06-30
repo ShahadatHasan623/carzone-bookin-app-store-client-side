@@ -31,7 +31,7 @@ const MyCars = () => {
   };
 
   return (
-    <div className="p-4">
+    <div className="lg:px-0 px-4 py-16 max-w-7xl mx-auto">
       {allCarsData.length === 0 ? (
         <AddedCars></AddedCars>
       ) : (

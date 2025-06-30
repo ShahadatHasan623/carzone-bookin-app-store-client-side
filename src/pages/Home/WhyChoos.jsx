@@ -31,8 +31,8 @@ const features = [
 ];
 const WhyChoos = () => {
   return (
-    <div className="my-10 lg:px-0 px-5 max-w-7xl mx-auto">
-      <h2 className="text-3xl font-bold text-center mb-8 text-blue-900">
+    <div className="mt-16 lg:px-0 px-4 max-w-7xl mx-auto">
+      <h2 className="text-3xl font-bold text-center mb-8 text-primary">
         Why Choose Us?
       </h2>
       <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">

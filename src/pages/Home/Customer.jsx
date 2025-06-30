@@ -49,9 +49,9 @@ const Customer = () => {
   };
 
   return (
-    <div className="bg-gray-100 py-12 lg:px-0 px-4 md:px-8 rounded-2xl">
+    <div className="bg-gray-100 py-12 max-w-7xl mx-auto lg:px-0 px-4 md:px-8 rounded-2xl mt-16">
       <div className="max-w-3xl mx-auto">
-        <h2 className="text-4xl font-bold text-center mb-10 text-gray-800">
+        <h2 className="text-4xl font-bold text-center mb-10 text-primary">
           What Our Customers Say
         </h2>
         <Slider {...settings}>

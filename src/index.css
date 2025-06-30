@@ -6,6 +6,10 @@
   themes: light --default;
 }
 
+:root{
+  --color-primary:#1d398f;
+}
+
 *{
    font-family: "Poppins", sans-serif;
 }
