@@ -54,7 +54,9 @@ const Book = () => {
       .then((res) => {
         const bookingId = res.data.insertedId || res.data._id;
         return axios
-          .patch(`https://cars-server-side.vercel.app/cars/increase-booking/${_id}`)
+          .patch(
+            `https://cars-server-side.vercel.app/cars/increase-booking/${_id}`
+          )
           .then(() => {
             Swal.fire({
               position: "center",
@@ -73,57 +75,68 @@ const Book = () => {
 
   return (
     <>
-      <div className="max-w-5xl mx-auto mt-10 card card-side bg-white rounded-2xl shadow-lg border">
-        <figure className="w-1/2">
-          <img
-            src={imageUrl}
-            alt={model}
-            className="h-full w-full object-cover rounded-l-2xl"
-          />
-        </figure>
-        <div className="card-body w-1/2 p-8 space-y-4">
-          <h2 className="text-3xl font-bold text-gray-800">{model}</h2>
-          <h3 className="text-xl text-gray-700 font-semibold">
-            Rent: <span className="text-[#f97316]">${price}/day</span>
-          </h3>
-          <div
-            className={`inline-block px-4 py-2 rounded-full text-sm font-medium ${
-              availability === "available"
-                ? "bg-green-100 text-green-600"
-                : "bg-red-100 text-red-600"
-            }`}
-          >
-            {availability === "available" ? "Available ✅" : "Not Available ❌"}
-          </div>
-          <p className="text-gray-600 text-sm leading-relaxed">{description}</p>
-          <div>
-            <h4 className="text-sm font-semibold text-gray-700 mb-1">
-              Features:
-            </h4>
-            <ul className="flex flex-wrap gap-2 text-sm text-gray-600">
-              <ul className="flex flex-wrap gap-2">
+      <div className="min-h-[calc(100vh-8rem)] flex justify-center items-center lg:px-0 px-4">
+        <div className="max-w-7xl w-full card card-side bg-white rounded-2xl shadow-lg border overflow-hidden">
+          <figure className="w-1/2">
+            <img
+              src={imageUrl}
+              alt={model}
+              className="h-full w-full object-cover"
+            />
+          </figure>
+          <div className="card-body w-1/2 p-8 space-y-4">
+            <h2 className="text-3xl font-bold text-gray-800">{model}</h2>
+            <h3 className="text-xl text-gray-700 font-semibold">
+              Rent: <span className="text-[#f97316]">${price}/day</span>
+            </h3>
+
+            <div
+              className={`inline-block px-4 py-2 rounded-full text-sm font-medium ${
+                availability === "available"
+                  ? "bg-green-100 text-green-600"
+                  : "bg-red-100 text-red-600"
+              }`}
+            >
+              {availability === "available"
+                ? "Available ✅"
+                : "Not Available ❌"}
+            </div>
+
+            <p className="text-gray-600 text-sm leading-relaxed">
+              {description}
+            </p>
+
+            {/* Features */}
+            <div>
+              <h4 className="text-sm font-semibold text-gray-700 mb-1">
+                Features:
+              </h4>
+              <div className="flex flex-wrap gap-2">
                 {Array.isArray(features) && features.length > 0 ? (
                   features.map((feature, idx) => (
-                    <li
+                    <span
                       key={idx}
                       className="bg-gray-200 px-3 py-1 rounded-full text-xs text-gray-700"
                     >
                       {feature}
-                    </li>
+                    </span>
                   ))
                 ) : (
-                  <li className="text-gray-500 italic">No features listed</li>
+                  <span className="text-gray-500 italic">
+                    No features listed
+                  </span>
                 )}
-              </ul>
-            </ul>
-          </div>
-          <div className="card-actions justify-end pt-4">
-            <button
-              onClick={() => setShowModal(true)}
-              className="btn bg-[#f97316] hover:bg-[#ea580c] text-white px-6 py-2 rounded-full shadow-md"
-            >
-              Book Now
-            </button>
+              </div>
+            </div>
+
+            <div className="card-actions justify-end pt-4">
+              <button
+                onClick={() => setShowModal(true)}
+                className="btn bg-primary hover:bg-[#ea580c] text-white px-6 py-2 rounded-full shadow-md"
+              >
+                Book Now
+              </button>
+            </div>
           </div>
         </div>
       </div>
