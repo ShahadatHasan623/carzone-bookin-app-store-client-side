@@ -4,7 +4,7 @@ import { Link } from "react-router";
 
 const Banner = () => {
   return (
-    <div className="banner flex flex-col items-center justify-center text-center space-y-6 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 py-20 shadow-lg">
+    <div className="banner flex flex-col items-center justify-center text-center space-y-6 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 shadow-lg">
       <h1 className="text-5xl font-extrabold text-white drop-shadow-lg">
         Drive Your Dreams Today!
       </h1>

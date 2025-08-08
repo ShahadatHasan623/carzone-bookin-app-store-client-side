@@ -31,7 +31,7 @@ const images = [
 const CarImageGallery = () => {
   return (
     <div
-      className="max-w-7xl mx-auto lg:px-0 px-6 mt-20"
+      className="max-w-7xl mx-auto lg:px-0 px-6 my-16"
       style={{ backgroundColor: "var(--background)" }}
     >
       <h2
