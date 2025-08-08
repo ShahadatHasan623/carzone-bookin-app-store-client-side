@@ -1,11 +1,11 @@
 import React from "react";
 import BookingTable from "./BookingTable";
 
-const MyBookingTable = ({ booking,reload,setReload }) => {
+const MyBookingTable = ({ booking, reload, setReload }) => {
   return (
-    <div className="overflow-x-auto bg-white rounded-xl shadow-lg">
-      <table className="table-auto w-full text-sm text-left text-gray-700">
-        <thead className="bg-gray-100 text-gray-700 uppercase text-xs border-b">
+    <div className="overflow-x-auto bg-white rounded-2xl shadow-xl">
+      <table className="table-auto w-full text-sm text-gray-700">
+        <thead className="bg-indigo-100 text-indigo-900 uppercase text-xs font-semibold border-b border-indigo-300">
           <tr>
             <th className="px-6 py-4">Car Image</th>
             <th className="px-6 py-4">Car Model</th>
@@ -18,9 +18,14 @@ const MyBookingTable = ({ booking,reload,setReload }) => {
           </tr>
         </thead>
 
-        <tbody className="divide-y divide-gray-200">
+        <tbody className="divide-y divide-indigo-200">
           {booking.map((book) => (
-            <BookingTable setReload={setReload} reload={reload} key={book._id} book={book} />
+            <BookingTable
+              setReload={setReload}
+              reload={reload}
+              key={book._id}
+              book={book}
+            />
           ))}
         </tbody>
       </table>

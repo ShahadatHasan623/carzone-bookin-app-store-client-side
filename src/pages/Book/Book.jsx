@@ -1,12 +1,12 @@
 import axios from "axios";
-import React, { use, useState } from "react";
+import React, { useState, useContext } from "react";
 import { useLoaderData } from "react-router";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../context/AuthContext";
 
 const Book = () => {
   const bookData = useLoaderData();
-  const { user } = use(AuthContext);
+  const { user } = useContext(AuthContext);
   const { model, price, availability, features, imageUrl, description, _id } =
     bookData;
 
@@ -32,14 +32,18 @@ const Book = () => {
 
   const handleBookingConfirm = () => {
     if (!startDate || !endDate || totalCost === 0) {
-      alert("Please select valid dates");
+      Swal.fire({
+        icon: "warning",
+        title: "Invalid Dates",
+        text: "Please select valid start and end dates.",
+      });
       return;
     }
 
     const bookingInfo = {
       model,
       pricePerDay: price,
-      carId: _id, // Track which car was booked
+      carId: _id,
       startDate,
       endDate,
       totalCost,
@@ -50,12 +54,12 @@ const Book = () => {
     };
 
     axios
-      .post("http://localhost:3000/bookingcar", bookingInfo)
+      .post("https://cars-server-side.vercel.app/bookingcar", bookingInfo)
       .then((res) => {
         const bookingId = res.data.insertedId || res.data._id;
         return axios
           .patch(
-            `http://localhost:3000/cars/increase-booking/${_id}`
+            `https://cars-server-side.vercel.app/cars/increase-booking/${_id}`
           )
           .then(() => {
             Swal.fire({
@@ -69,70 +73,69 @@ const Book = () => {
       })
       .catch((error) => {
         console.error(error);
-        alert("Booking failed. Try again.");
+        Swal.fire({
+          icon: "error",
+          title: "Booking Failed",
+          text: "Something went wrong. Please try again.",
+        });
       });
   };
 
   return (
     <>
-      <div className="min-h-[calc(100vh-8rem)] flex justify-center items-center lg:px-0 px-4">
-        <div className="max-w-7xl w-full card card-side bg-white rounded-2xl shadow-lg border overflow-hidden">
+      <div className="min-h-[calc(100vh-8rem)] flex justify-center items-center lg:px-0 px-4 bg-gradient-to-br from-indigo-50 to-indigo-100 py-16">
+        <div className="max-w-7xl w-full card card-side bg-white rounded-3xl shadow-2xl border border-indigo-200 overflow-hidden">
           <figure className="w-1/2">
             <img
               src={imageUrl}
               alt={model}
-              className="h-full w-full object-cover"
+              className="h-full w-full object-cover rounded-l-3xl"
             />
           </figure>
-          <div className="card-body w-1/2 p-8 space-y-4">
-            <h2 className="text-3xl font-bold text-gray-800">{model}</h2>
-            <h3 className="text-xl text-gray-700 font-semibold">
-              Rent: <span className="text-[#f97316]">${price}/day</span>
-            </h3>
-
-            <div
-              className={`inline-block px-4 py-2 rounded-full text-sm font-medium ${
-                availability === "available"
-                  ? "bg-green-100 text-green-600"
-                  : "bg-red-100 text-red-600"
-              }`}
-            >
-              {availability === "available"
-                ? "Available ✅"
-                : "Not Available ❌"}
-            </div>
-
-            <p className="text-gray-600 text-sm leading-relaxed">
-              {description}
-            </p>
-
-            {/* Features */}
+          <div className="card-body w-1/2 p-10 space-y-6 flex flex-col justify-between">
             <div>
-              <h4 className="text-sm font-semibold text-gray-700 mb-1">
-                Features:
-              </h4>
-              <div className="flex flex-wrap gap-2">
-                {Array.isArray(features) && features.length > 0 ? (
-                  features.map((feature, idx) => (
-                    <span
-                      key={idx}
-                      className="bg-gray-200 px-3 py-1 rounded-full text-xs text-gray-700"
-                    >
-                      {feature}
-                    </span>
-                  ))
-                ) : (
-                  <span className="text-gray-500 italic">
-                    No features listed
-                  </span>
-                )}
+              <h2 className="text-4xl font-extrabold text-indigo-900">{model}</h2>
+              <h3 className="text-2xl text-indigo-700 font-semibold mt-1">
+                Rent: <span className="text-orange-500">${price}/day</span>
+              </h3>
+
+              <div
+                className={`inline-block px-5 py-2 rounded-full text-sm font-medium mt-3 select-none ${
+                  availability === "available"
+                    ? "bg-green-100 text-green-700"
+                    : "bg-red-100 text-red-700"
+                }`}
+              >
+                {availability === "available" ? "Available ✅" : "Not Available ❌"}
+              </div>
+
+              <p className="text-gray-600 mt-6 text-lg leading-relaxed">{description}</p>
+
+              {/* Features */}
+              <div className="mt-6">
+                <h4 className="text-indigo-800 font-semibold mb-2">Features:</h4>
+                <div className="flex flex-wrap gap-3">
+                  {Array.isArray(features) && features.length > 0 ? (
+                    features.map((feature, idx) => (
+                      <span
+                        key={idx}
+                        className="bg-indigo-100 text-indigo-900 px-4 py-1 rounded-full text-sm shadow-sm"
+                      >
+                        {feature}
+                      </span>
+                    ))
+                  ) : (
+                    <span className="text-gray-400 italic">No features listed</span>
+                  )}
+                </div>
               </div>
             </div>
 
-            <div className="card-actions justify-end pt-4">
+            <div className="card-actions justify-end">
               <button
                 onClick={() => setShowModal(true)}
-                className="btn bg-primary hover:bg-[#ea580c] text-white px-6 py-2 rounded-full shadow-md"
+                className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-8 py-3 rounded-full shadow-lg transition-transform duration-300 hover:scale-[1.05] active:scale-95"
+                aria-label="Book Now"
               >
                 Book Now
               </button>
@@ -141,52 +144,61 @@ const Book = () => {
         </div>
       </div>
 
+      {/* Modal */}
       {showModal && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-40 bg-black/40">
-          <div className="bg-white p-8 rounded-xl w-full max-w-md shadow-lg relative">
-            <h3 className="text-xl font-bold mb-4">Confirm Your Booking</h3>
-            <p className="text-sm text-gray-600 mb-4">
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 backdrop-blur-sm">
+          <div className="bg-white p-8 rounded-2xl max-w-md w-full shadow-2xl relative">
+            <h3 className="text-2xl font-bold mb-5 text-indigo-900">
+              Confirm Your Booking
+            </h3>
+            <p className="text-gray-700 mb-6">
               You're about to book <strong>{model}</strong> at{" "}
               <strong>${price}/day</strong>
             </p>
 
-            <div className="space-y-3">
+            <div className="space-y-5">
               <div>
-                <label className="text-sm font-medium">Start Date & Time</label>
+                <label className="block text-sm font-medium text-indigo-800 mb-1">
+                  Start Date & Time
+                </label>
                 <input
                   type="datetime-local"
-                  className="w-full border rounded px-3 py-2 mt-1"
+                  className="w-full border border-indigo-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
                   value={startDate}
                   onChange={(e) => handleDateChange(e.target.value, endDate)}
                 />
               </div>
               <div>
-                <label className="text-sm font-medium">End Date & Time</label>
+                <label className="block text-sm font-medium text-indigo-800 mb-1">
+                  End Date & Time
+                </label>
                 <input
                   type="datetime-local"
-                  className="w-full border rounded px-3 py-2 mt-1"
+                  className="w-full border border-indigo-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
                   value={endDate}
                   onChange={(e) => handleDateChange(startDate, e.target.value)}
                 />
               </div>
-              <div className="text-sm font-semibold text-gray-700">
+              <div className="text-lg font-semibold text-indigo-900">
                 Total Cost:{" "}
-                <span className="text-[#22c55e]">
+                <span className="text-green-600">
                   ${totalCost ? totalCost.toFixed(2) : "0.00"}
                 </span>
               </div>
             </div>
 
-            <div className="flex justify-end space-x-3 mt-6">
+            <div className="flex justify-end gap-4 mt-8">
               <button
                 onClick={() => setShowModal(false)}
-                className="btn btn-sm bg-gray-300 text-gray-800"
+                className="bg-gray-300 text-gray-800 px-6 py-2 rounded-lg hover:bg-gray-400 transition"
+                aria-label="Cancel booking"
               >
                 Cancel
               </button>
               <button
                 onClick={handleBookingConfirm}
-                className="btn btn-sm bg-[#22c55e] text-white"
+                className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg shadow-lg transition"
+                aria-label="Confirm booking"
               >
                 Confirm
               </button>
@@ -194,10 +206,10 @@ const Book = () => {
 
             <button
               onClick={() => setShowModal(false)}
-              className="absolute top-3 right-3 text-gray-500 hover:text-gray-800"
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-700 text-2xl font-bold focus:outline-none"
               aria-label="Close modal"
             >
-              ✕
+              &times;
             </button>
           </div>
         </div>
