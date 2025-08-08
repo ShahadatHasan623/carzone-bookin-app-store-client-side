@@ -1,5 +1,4 @@
 import React from "react";
-
 import { motion } from "framer-motion";
 
 const offers = [
@@ -12,24 +11,30 @@ const containerVariants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.2,
+      staggerChildren: 0.25,
     },
   },
 };
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 };
 
 const OfferSection = () => {
   return (
-    <section className="max-w-7xl mx-auto px-4 py-8 my-20 bg-gradient-to-r from-orange-50 to-orange-100 rounded-lg shadow-lg ">
-      <h2 className="text-4xl font-extrabold mb-12 text-center text-primary tracking-wide drop-shadow-md">
+    <section
+      className="max-w-7xl mx-auto px-6 py-14 my-24 rounded-3xl shadow-2xl"
+      style={{ backgroundColor: "var(--background)" }}
+    >
+      <h2
+        className="text-4xl font-extrabold mb-16 text-center select-none"
+        style={{ color: "var(--text)", textShadow: "1px 1px 4px rgba(169, 55, 225, 0.5)" }}
+      >
         Our Exclusive Offers
       </h2>
       <motion.div
-        className="grid grid-cols-1 md:grid-cols-3 gap-8"
+        className="grid grid-cols-1 md:grid-cols-3 gap-12"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
@@ -37,12 +42,27 @@ const OfferSection = () => {
         {offers.map((offer) => (
           <motion.div
             key={offer.id}
-            className="bg-white rounded-xl p-8 shadow-xl hover:shadow-2xl cursor-pointer transform hover:-translate-y-2 transition-transform duration-300"
+            className="rounded-3xl p-8 shadow-lg cursor-pointer flex flex-col justify-center"
+            style={{
+              background: `linear-gradient(135deg, var(--primary), var(--secondary))`,
+              color: "white",
+              boxShadow:
+                "0 12px 25px rgba(169, 55, 225, 0.4), 0 6px 10px rgba(223, 115, 48, 0.3)",
+            }}
             variants={cardVariants}
-            whileHover={{ scale: 1.05 }}
+            whileHover={{
+              scale: 1.07,
+              boxShadow:
+                "0 20px 40px rgba(169, 55, 225, 0.7), 0 10px 20px rgba(223, 115, 48, 0.6)",
+            }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
           >
-            <h3 className="text-2xl font-bold mb-3 text-[#ff6200]">{offer.title}</h3>
-            <p className="text-gray-700 text-lg">{offer.desc}</p>
+            <h3 className="text-3xl font-bold mb-4" style={{ color: "var(--accent)" }}>
+              {offer.title}
+            </h3>
+            <p className="text-lg leading-relaxed" style={{ color: "rgba(255, 255, 255, 0.9)" }}>
+              {offer.desc}
+            </p>
           </motion.div>
         ))}
       </motion.div>
