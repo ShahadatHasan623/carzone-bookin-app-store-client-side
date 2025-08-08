@@ -68,7 +68,7 @@ const Register = () => {
       })      
     }
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black flex flex-col-reverse lg:flex-row items-center justify-center px-4 py-10 gap-10 rounded-2xl">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black flex flex-col-reverse lg:flex-row items-center justify-center px-4 py-10 my-16 gap-10 rounded-2xl max-w-7xl mx-auto">
       <div className="bg-gray-900 text-white rounded-2xl shadow-xl p-6 sm:p-8 w-full max-w-md">
         <h2 className="text-3xl font-bold mb-6 text-center tracking-wide">
           CarZone Register

@@ -21,7 +21,7 @@ const BookingTable = ({ book, reload, setReload }) => {
 
   const handleConfirmUpdate = () => {
     axios
-      .patch(`https://cars-server-side.vercel.app/bookingcar/update/${_id}`, {
+      .patch(`http://localhost:3000/bookingcar/update/${_id}`, {
         startDate: editStartDate,
         endDate: editEndDate,
       })
@@ -52,7 +52,7 @@ const BookingTable = ({ book, reload, setReload }) => {
       if (result.isConfirmed) {
         axios
           .patch(
-            `https://cars-server-side.vercel.app/bookingcar/cancel/${id}`,
+            `http://localhost:3000/bookingcar/cancel/${id}`,
             {
               status: "cancelled",
             }

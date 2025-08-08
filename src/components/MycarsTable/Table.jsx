@@ -24,7 +24,7 @@ const Table = ({ allTable, carsData, setCars }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`https://cars-server-side.vercel.app/cars/${id}`).then((res) => {
+        axios.delete(`http://localhost:3000/cars/${id}`).then((res) => {
           if (res.data.deletedCount) {
             const remaininguser = carsData.filter((user) => user._id !== id);
             setCars(remaininguser);
