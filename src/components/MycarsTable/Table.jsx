@@ -4,6 +4,7 @@ import { MdDelete } from "react-icons/md";
 import UpdateModal from "./UpdateModal";
 import axios from "axios";
 import Swal from "sweetalert2";
+
 const Table = ({ allTable, carsData, setCars }) => {
   const [openModal, setOpenModal] = useState(false);
   const [selectedCarId, setSelectedCarId] = useState(null);
@@ -19,51 +20,54 @@ const Table = ({ allTable, carsData, setCars }) => {
       text: "You won't be able to revert this!",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
+      confirmButtonColor: "#f97316", // Tailwind orange-500
+      cancelButtonColor: "#ef4444", // Tailwind red-500
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`http://localhost:3000/cars/${id}`).then((res) => {
-          if (res.data.deletedCount) {
-            const remaininguser = carsData.filter((user) => user._id !== id);
-            setCars(remaininguser);
-            Swal.fire("Deleted!", "Your file has been deleted.", "success");
-          }
-        });
-        Swal.fire({
-          title: "Deleted!",
-          text: "Your file has been deleted.",
-          icon: "success",
-        });
+        axios
+          .delete(`https://cars-server-side.vercel.app/cars/${id}`)
+          .then((res) => {
+            if (res.data.deletedCount) {
+              const remainingCars = carsData.filter((car) => car._id !== id);
+              setCars(remainingCars);
+              Swal.fire("Deleted!", "Car has been deleted.", "success");
+            }
+          })
+          .catch(() => {
+            Swal.fire(
+              "Error!",
+              "Something went wrong while deleting.",
+              "error"
+            );
+          });
       }
     });
   };
 
   return (
     <>
-      <tr className="hover:bg-gray-50 transition duration-200">
+      <tr className="hover:bg-gray-50 transition-colors duration-300 ease-in-out cursor-default">
         <td className="px-6 py-4">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-4">
             <img
               src={allTable.imageUrl}
-              alt="Car"
-              className="h-12 w-12 rounded-md object-cover border"
+              alt={`${allTable.model} image`}
+              className="h-14 w-14 rounded-lg object-cover border border-gray-200 shadow-sm"
+              loading="lazy"
             />
           </div>
         </td>
-        <td className="px-6 py-4 font-medium text-gray-800">
-          {allTable.model}
-        </td>
-        <td className="px-6 py-4 text-green-600 font-semibold">
-          ${allTable.price}/Day
-        </td>
-        <td className="px-6 py-4 text-green-600 font-semibold">
-          {allTable.bookingCount}
-        </td>
+
+        <td className="px-6 py-4 font-semibold text-gray-900">{allTable.model}</td>
+
+        <td className="px-6 py-4 text-orange-600 font-semibold">${allTable.price}/Day</td>
+
+        <td className="px-6 py-4 text-indigo-600 font-semibold">{allTable.bookingCount}</td>
+
         <td className="px-6 py-4">
           <span
-            className={`px-2 py-1 rounded-full text-xs font-semibold ${
+            className={`inline-block px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide ${
               allTable.availability === "available"
                 ? "bg-green-100 text-green-800"
                 : "bg-red-100 text-red-800"
@@ -72,24 +76,26 @@ const Table = ({ allTable, carsData, setCars }) => {
             {allTable.availability}
           </span>
         </td>
-        <td className="px-6 py-4 text-sm text-gray-500">
-          {allTable.dateAdded}
-        </td>
-        <td className="px-6 py-4">
-          <div className="flex gap-2">
+
+        <td className="px-6 py-4 text-gray-500 text-sm">{allTable.dateAdded}</td>
+
+        <td className="px-6 py-4 text-right">
+          <div className="flex justify-end gap-3">
             <button
               onClick={() => handleEditClick(allTable._id)}
-              className="p-2 rounded bg-blue-600 hover:bg-blue-700 text-white"
-              title="Edit"
+              className="flex items-center justify-center p-2 rounded-md bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-1 text-white transition"
+              title="Edit Car"
+              aria-label={`Edit ${allTable.model}`}
             >
-              <FaEdit size={16} />
+              <FaEdit size={18} />
             </button>
             <button
               onClick={() => handleDelete(allTable._id)}
-              className="p-2 rounded bg-red-600 hover:bg-red-700 text-white"
-              title="Delete"
+              className="flex items-center justify-center p-2 rounded-md bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-1 text-white transition"
+              title="Delete Car"
+              aria-label={`Delete ${allTable.model}`}
             >
-              <MdDelete size={16} />
+              <MdDelete size={18} />
             </button>
           </div>
         </td>

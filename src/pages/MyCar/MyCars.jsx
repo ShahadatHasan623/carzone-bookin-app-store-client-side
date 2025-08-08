@@ -5,17 +5,25 @@ import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const MyCars = () => {
+  const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
+
   const [allCarsData, setAllCarsData] = useState([]);
   const [sortOrder, setSortOrder] = useState("lowest");
-  const{user}=useAuth()
-  const axiosSecure =useAxiosSecure()
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axiosSecure(`/cars?email=${user.email}`)
-      .then(({data}) => {
-        setAllCarsData(data);
-      });
-  }, []);
+    if (user?.email) {
+      setLoading(true);
+      axiosSecure(`/cars?email=${user.email}`)
+        .then(({ data }) => setAllCarsData(data))
+        .catch((err) => {
+          console.error("Failed to fetch cars:", err);
+          setAllCarsData([]);
+        })
+        .finally(() => setLoading(false));
+    }
+  }, [user?.email, axiosSecure]);
 
   const handleSortChange = (e) => {
     const selected = e.target.value;
@@ -31,29 +39,40 @@ const MyCars = () => {
   };
 
   return (
-    <div className="lg:px-0 px-4 py-16 max-w-7xl mx-auto">
-      {allCarsData.length === 0 ? (
-        <AddedCars></AddedCars>
+    <section className="max-w-7xl mx-auto px-4 lg:px-0 py-16 min-h-[70vh]">
+      <h1 className="text-3xl font-extrabold mb-8 text-primary text-center">
+        My Cars
+      </h1>
+
+      {loading ? (
+        <div className="text-center text-gray-500">Loading cars...</div>
+      ) : allCarsData.length === 0 ? (
+        <AddedCars />
       ) : (
         <>
-          <div className="mb-4">
-            <label htmlFor="sort" className="mr-2 font-semibold">
+          <div className="mb-6 flex justify-end items-center space-x-3">
+            <label htmlFor="sort" className="font-semibold text-gray-700">
               Sort by Price:
             </label>
             <select
               id="sort"
-              onChange={handleSortChange}
-              className="border px-2 py-1 rounded"
               value={sortOrder}
+              onChange={handleSortChange}
+              className="border border-gray-300 rounded-md px-3 py-1 focus:outline-none focus:ring-2 focus:ring-orange-400"
             >
               <option value="lowest">Lowest First</option>
               <option value="highest">Highest First</option>
             </select>
           </div>
-          <MyCarsTable setAllCarsData={setAllCarsData} allCarsData={allCarsData} sortOrder={sortOrder} />
+
+          <MyCarsTable
+            allCarsData={allCarsData}
+            setAllCarsData={setAllCarsData}
+            sortOrder={sortOrder}
+          />
         </>
       )}
-    </div>
+    </section>
   );
 };
 
