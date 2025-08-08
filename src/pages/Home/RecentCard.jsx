@@ -14,14 +14,15 @@ const RecentCard = ({ recnt }) => {
 
   return (
     <motion.div
-      className="card bg-[#fcebd2] w-full max-w-sm sm:max-w-md md:max-w-sm lg:max-w-md shadow-lg rounded-xl overflow-hidden cursor-pointer flex flex-col"
+      className="card w-full max-w-sm sm:max-w-md md:max-w-sm lg:max-w-md rounded-2xl overflow-hidden cursor-pointer flex flex-col shadow-xl"
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
       viewport={{ once: true }}
-      whileHover={{ scale: 1.05 }}
+      whileHover={{ scale: 1.05, boxShadow: "0 10px 25px rgba(169, 55, 225, 0.5)" }}
+      style={{ backgroundColor: "var(--background)" }}
     >
-      <figure className="h-48 w-full overflow-hidden rounded-t-xl relative">
+      <figure className="h-52 w-full overflow-hidden rounded-t-2xl relative">
         <img
           src={imageUrl}
           alt={model}
@@ -29,7 +30,7 @@ const RecentCard = ({ recnt }) => {
           loading="lazy"
         />
         <span
-          className={`absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-semibold shadow-md ${
+          className={`absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-semibold shadow-md select-none ${
             availability === "Available"
               ? "bg-green-600 text-white"
               : "bg-red-600 text-white"
@@ -39,17 +40,26 @@ const RecentCard = ({ recnt }) => {
         </span>
       </figure>
 
-      <div className="card-body p-5 flex flex-col justify-between flex-grow">
-        <h2 className="flex items-center gap-2 text-xl sm:text-2xl font-semibold text-gray-900 mb-3">
-          <FaCar className="text-orange-500" /> {model}
+      <div className="card-body p-6 flex flex-col justify-between flex-grow">
+        <h2
+          className="flex items-center gap-3 text-2xl font-bold mb-3 select-none"
+          style={{ color: "var(--primary)" }}
+        >
+          <FaCar className="text-secondary" /> {model}
         </h2>
 
-        <h3 className="flex gap-2 items-center text-lg sm:text-xl font-medium text-orange-600 mb-2">
-          <FaDollarSign size={20} /> <span>${price}</span>
+        <h3
+          className="flex gap-2 items-center text-xl font-semibold mb-3 select-none"
+          style={{ color: "var(--secondary)" }}
+        >
+          <FaDollarSign size={22} /> <span>${price}</span>
         </h3>
 
-        <div className="italic text-gray-600 flex items-center gap-2 text-sm sm:text-base">
-          <IoTime className="text-orange-500" size={20} />
+        <div
+          className="italic flex items-center gap-2 text-base select-none"
+          style={{ color: "var(--text)" }}
+        >
+          <IoTime className="text-accent" size={22} />
           <span>Added: {formattedDate}</span>
         </div>
       </div>
