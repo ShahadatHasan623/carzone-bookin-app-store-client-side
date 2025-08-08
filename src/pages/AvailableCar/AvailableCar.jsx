@@ -111,7 +111,7 @@ const AvailableCar = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.3 }}
-        className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8 mb-14"
+        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-14"
       >
         <select
           value={selectedModel}
@@ -166,8 +166,8 @@ const AvailableCar = () => {
             animate={{ opacity: 1 }}
             className={`gap-8 ${
               isGridView
-                ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-stretch"
-                : "flex flex-col"
+                ? "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-stretch"
+                : "flex flex-col gap-6"
             }`}
           >
             {carsData.map((car, index) => (
@@ -177,7 +177,7 @@ const AvailableCar = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.07, duration: 0.5 }}
                 whileHover={{ scale: 1.06, boxShadow: "0px 16px 35px rgba(61, 207, 255, 0.3)" }}
-                className="rounded-3xl overflow-hidden shadow-xl bg-white hover:bg-purple-50 transition-all flex flex-col h-full"
+                className="rounded-3xl overflow-hidden object-cover shadow-xl bg-white  hover:bg-purple-50 transition-all flex flex-col h-full"
               >
                 <AvailableCard isGridView={isGridView} carsData={car} />
               </motion.div>
