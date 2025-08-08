@@ -30,29 +30,41 @@ const images = [
 
 const CarImageGallery = () => {
   return (
-    <div className="max-w-7xl mx-auto lg:px-0 px-4 mt-16">
-      <h2 className="text-4xl font-extrabold text-center text-blue-800 mb-12">
+    <div
+      className="max-w-7xl mx-auto lg:px-0 px-6 mt-20"
+      style={{ backgroundColor: "var(--background)" }}
+    >
+      <h2
+        className="text-4xl font-extrabold text-center mb-12 select-none"
+        style={{ color: "var(--text)" }}
+      >
         Explore the Car in Detail
       </h2>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {images.map((img) => (
           <motion.div
             key={img.id}
-            className="rounded-2xl overflow-hidden shadow-xl bg-white border border-gray-200 hover:shadow-2xl transition duration-300"
-            initial={{ opacity: 0, y: 50 }}
+            className="rounded-3xl overflow-hidden shadow-2xl border border-gray-300 bg-white cursor-pointer flex flex-col"
+            initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: img.id * 0.1 }}
+            transition={{ duration: 0.6, delay: img.id * 0.1 }}
             viewport={{ once: true }}
-            whileHover={{ scale: 1.04 }}
+            whileHover={{ scale: 1.05, boxShadow: "0 15px 35px rgba(169, 55, 225, 0.4)" }}
           >
-            <img
-              src={img.src}
-              alt={img.alt}
-              className="w-full h-52 object-cover hover:scale-105 transition-transform duration-300 ease-in-out"
-              loading="lazy"
-            />
-            <div className="p-4 text-center text-base font-semibold text-gray-800">
-              {img.label}
+            <div className="relative h-60 overflow-hidden rounded-t-3xl">
+              <img
+                src={img.src}
+                alt={img.alt}
+                className="w-full h-full object-cover transition-transform duration-400 ease-in-out hover:scale-110"
+                loading="lazy"
+              />
+              <div
+                className="absolute bottom-4 left-4 bg-purple-700 bg-opacity-90 text-white font-semibold px-4 py-1 rounded-full select-none text-sm md:text-base shadow-lg"
+                style={{ backgroundColor: "var(--primary)" }}
+              >
+                {img.label}
+              </div>
             </div>
           </motion.div>
         ))}
