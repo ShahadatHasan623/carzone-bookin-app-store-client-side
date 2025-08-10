@@ -6,7 +6,6 @@ import CarImageGallery from './CarImageGallery';
 import SupportSection from './SupportSection';
 import Customer from './Customer';
 import OfferSection from '../offerSection/offerSection';
-
 const Home = () => {
     return (
         <div>
