@@ -11,6 +11,7 @@ import Loading from "../components/Loading/Loading";
 import MyBookingCar from "../pages/MyBookCar/MyBookingCar";
 import MyCars from "../pages/MyCar/MyCars";
 import ErrorPage from "../pages/Error/ErrorPage";
+import AboutUs from "../components/AboutUs/AboutUs";
 
 
 export const router =createBrowserRouter([
@@ -27,6 +28,10 @@ export const router =createBrowserRouter([
             {
                 path:'/available',
                 Component:AvailableCar,
+            },
+            {
+                path:'/about',
+                Component:AboutUs
             },
             {
                 path:'/login',

@@ -33,6 +33,9 @@ const Navbar = () => {
           Available Cars
         </NavLink>
       </li>
+      <li>
+        <NavLink className={navLinkClass} to='/about'>About</NavLink>
+      </li>
       {user && (
         <>
           <li>
