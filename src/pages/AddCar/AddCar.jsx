@@ -39,7 +39,7 @@ const AddCar = () => {
   };
 
   return (
-    <div className="w-full lg:px-0 px-4 py-16 md:px-6 bg-gray-50 min-h-screen flex items-center justify-center">
+    <div className="w-full lg:px-0 px-4 py-16 md:px-6 min-h-screen flex items-center justify-center">
       <div className="max-w-4xl w-full bg-white p-10 rounded-3xl shadow-2xl border border-gray-200">
         <h2 className="text-4xl font-extrabold text-center text-indigo-900 mb-12 select-none drop-shadow-md">
           Add New Car

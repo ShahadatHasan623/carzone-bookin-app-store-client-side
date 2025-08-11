@@ -1,20 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 @import "tailwindcss";
-@plugin "daisyui" {
-  themes: light --default;
-}
+@plugin "daisyui";
+@plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+} 
 
 #app {
   height: 100%;
 }
 
-body {
-  background-color: var(--background);
-  color: var(--text);
-  position: relative;
-  height: 100%;
-}
+/* Light mode variables (default) */
 :root {
   --text: #2710d5;
   --background: #eae6ed;
@@ -22,6 +19,29 @@ body {
   --secondary: #df7330;
   --accent: #3dcfff;
 }
+
+/* Dark mode variables */
+[data-theme="dark"] {
+  --text: #e0e0e0;
+  --background: #121212;
+  --primary: #bb86fc;
+  --secondary: #ff7043;
+  --accent: #03dac6;
+}
+
+/* Body styles */
+body {
+  background-color: var(--background);
+  color: var(--text);
+  position: relative;
+  height: 100%;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
 
 
 * {

@@ -47,7 +47,7 @@ export const router =createBrowserRouter([
             },
             {
                 path:'/book/:id',
-                Component:Book,
+                element:<PrivateRoute><Book></Book></PrivateRoute>,
                 hydrateFallbackElement:<Loading></Loading>,
                 loader:({params})=>fetch(`https://cars-server-side.vercel.app/cars/available/${params.id}`)
             },

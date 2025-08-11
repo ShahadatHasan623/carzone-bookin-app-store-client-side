@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import logoImg from "../assets/logo.png";
 import { toast } from "react-toastify";
 import useAuth from "../hooks/useAuth";
+import ThemeToggle from "../components/ThemeToggle";
 
 const Navbar = () => {
   const { user, signOutUser } =useAuth();
@@ -110,9 +111,9 @@ const Navbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal gap-4">{links}</ul>
       </div>
-
       {/* Navbar End */}
       <div className="navbar-end">
+        <ThemeToggle></ThemeToggle>
         {user ? (
           <motion.img
             whileHover={{ scale: 1.1 }}
