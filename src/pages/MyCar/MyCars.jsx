@@ -3,6 +3,7 @@ import MyCarsTable from "../../components/MycarsTable/MyCarsTable";
 import AddedCars from "../AddedCars/AddedCars";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import Loading from "../../components/Loading/Loading";
 
 const MyCars = () => {
   const { user } = useAuth();
@@ -45,7 +46,7 @@ const MyCars = () => {
       </h1>
 
       {loading ? (
-        <div className="text-center text-gray-500">Loading cars...</div>
+        <Loading></Loading>
       ) : allCarsData.length === 0 ? (
         <AddedCars />
       ) : (
